@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/multi-select.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="col-md-12 column">
+    <a id="modal-48445" href="#modal-container-48445" role="button" class="btn" data-toggle="modal">触发遮罩窗体</a>
+
+    <div class="modal fade" id="modal-container-48445" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择通道
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <select id='optgroup' multiple='multiple' style="display: none"></select>
+                    <button type="button" class="btn btn-info btn-sm" id="btn">创建</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn3">查看原数据</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn4">清空</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn5">全选</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn6">取消</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn7">查看update</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn8">查看delete</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn9">查看add</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="./js/jquery-1.10.2.min.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/jquery.multi-select.js"></script>
+<script src="./js/jquery.quicksearch.js"></script>
+<script src="./js/jquery.multi-select-data.js"></script>
+<script>
+
+    var multiSelect = new MultiSelect($('#optgroup'), 'INDEX', 'ARGS', {name: 'VALID', select: '1'});
+    multiSelect.onEvent('afterSelect',function (values) {
+        alert(values);
+    });
+    multiSelect.onEvent('afterDeselect',function (values) {
+        alert(values);
+    });
+
+    $('#btn').click(function () {
+
+        var RESULT_ALL = [
+            {
+                INDEX: '0',
+                SELECT: false,
+                ARGS: '-c0 -k',
+                CHANNELNO: '0',
+                MODAL: 'billing',
+                VALID: '0'
+            }, {
+                INDEX: '1',
+                SELECT: true,
+                ARGS: '-c1 -k',
+                CHANNELNO: '1',
+                MODAL: 'billing',
+                VALID: '1'
+            }, {
+                INDEX: '2',
+                SELECT: true,
+                ARGS: '-c2 -k',
+                CHANNELNO: '2',
+                MODAL: 'billing',
+                VALID: '1'
+            }
+        ];
+
+        multiSelect.init(RESULT_ALL);
+    });
+    $('#btn3').click(function () {
+        alert(JSON.stringify(multiSelect.getOrigin()));
+    });
+    $('#btn4').click(function () {
+        multiSelect.empty();
+    });
+    $('#btn5').click(function () {
+        multiSelect.selectAll();
+    });
+    $('#btn6').click(function () {
+        multiSelect.unSelectAll();
+    });
+    $('#btn7').click(function () {
+        alert(JSON.stringify(multiSelect.getUpdate()));
+    });
+    $('#btn8').click(function () {
+        alert(JSON.stringify(multiSelect.getDelete()));
+    });
+    $('#btn9').click(function () {
+        alert(JSON.stringify(multiSelect.getAdd()));
+    });
+
+
+</script>
+
+
+</body>
+</html>
