@@ -22,6 +22,7 @@
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <select id='optgroup' multiple='multiple' style="display: none"></select>
+                    <div style="height: 10px"></div>
                     <button type="button" class="btn btn-info btn-sm" id="btn">创建</button>
                     <button type="button" class="btn btn-info btn-sm" id="btn3">查看原数据</button>
                     <button type="button" class="btn btn-info btn-sm" id="btn4">清空</button>
@@ -51,42 +52,66 @@
 <script src="./js/jquery.multi-select-data.js"></script>
 <script>
 
-    var multiSelect = new MultiSelect($('#optgroup'), 'INDEX', 'ARGS', {name: 'VALID', select: '1'});
+    var multiSelect = new MultiSelect($('#optgroup'), 'INDEX', 'TEXT', {name: 'VALID', select: '1'});
     multiSelect.onEvent('afterSelect',function (values) {
-        alert(values);
+        console.log('afterSelect:');
+        console.log(values);
     });
     multiSelect.onEvent('afterDeselect',function (values) {
-        alert(values);
+        console.log('afterDeselect:');
+        console.log(values);
     });
 
     $('#btn').click(function () {
 
-        var RESULT_ALL = [
+        var data = [
             {
                 INDEX: '0',
                 SELECT: false,
-                ARGS: '-c0 -k',
-                CHANNELNO: '0',
-                MODAL: 'billing',
+                TEXT: 'one',
+                CHANNEL: '0',
+                LABEL: 'billing',
                 VALID: '0'
             }, {
                 INDEX: '1',
-                SELECT: true,
-                ARGS: '-c1 -k',
-                CHANNELNO: '1',
-                MODAL: 'billing',
-                VALID: '1'
+                SELECT: false,
+                TEXT: 'two',
+                CHANNEL: '1',
+                LABEL: 'billing',
+                VALID: '0'
             }, {
                 INDEX: '2',
                 SELECT: true,
-                ARGS: '-c2 -k',
-                CHANNELNO: '2',
-                MODAL: 'billing',
+                TEXT: 'three',
+                CHANNEL: '2',
+                LABEL: 'billing',
+                VALID: '1'
+            },
+            {
+                INDEX: '3',
+                SELECT: true,
+                TEXT: 'four',
+                CHANNEL: '3',
+                LABEL: 'billing',
+                VALID: '1'
+            }, {
+                INDEX: '4',
+                SELECT: true,
+                TEXT: 'five',
+                CHANNEL: '4',
+                LABEL: 'billing',
+                VALID: '1'
+            }, {
+                INDEX: '5',
+                SELECT: true,
+                TEXT: 'six',
+                CHANNEL: '5',
+                LABEL: 'billing',
                 VALID: '1'
             }
         ];
 
-        multiSelect.init(RESULT_ALL);
+        multiSelect.init(data);
     });
     $('#btn3').click(function () {
         alert(JSON.stringify(multiSelect.getOrigin()));

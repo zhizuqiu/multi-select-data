@@ -45,32 +45,36 @@ MultiSelect.prototype = {
             afterSelect: function (values) {
                 this.qs1.cache();
                 this.qs2.cache();
+                var arr = [];
                 for (x in values) {
                     for (y in sup.RESULT_ALL) {
                         if (sup.RESULT_ALL.hasOwnProperty(y)) {
                             if (sup.RESULT_ALL[y][sup.index] == values[x]) {
                                 sup.RESULT_SELECT.push(sup.RESULT_ALL[y]);
                                 sup.RESULT_ALL.splice(y, 1);
+                                arr.push(sup.RESULT_ALL[y]);
                             }
                         }
                     }
                 }
-                sup._fire('afterSelect',values);
+                sup._fire('afterSelect',arr);
             },
             afterDeselect: function (values) {
                 this.qs1.cache();
                 this.qs2.cache();
+                var arr = [];
                 for (x in values) {
                     for (y in sup.RESULT_SELECT) {
-                        if (sup.RESULT_ALL.hasOwnProperty(y)) {
+                        if (sup.RESULT_SELECT.hasOwnProperty(y)) {
                             if (sup.RESULT_SELECT[y][sup.index] == values[x]) {
                                 sup.RESULT_ALL.push(sup.RESULT_SELECT[y]);
                                 sup.RESULT_SELECT.splice(y, 1);
+                                arr.push(sup.RESULT_ALL[y]);
                             }
                         }
                     }
                 }
-                sup._fire('afterDeselect',values);
+                sup._fire('afterDeselect',arr);
             }
         });
     },
@@ -136,50 +140,59 @@ MultiSelect.prototype = {
         origin.push(this.YUAN_SELECT);
         return origin;
     },
-    getUpdate: function () {
+    getUpdate: function (filterName) {
+        if (filterName==null){
+            filterName = this.index;
+        }
         var arr = [];
         var select_map = [];
         for (x in this.RESULT_SELECT) {
-            select_map[this.RESULT_SELECT[x].CHANNELNO] = 1;
+            select_map[this.RESULT_SELECT[x][filterName]] = 1;
         }
         for (y in this.YUAN_SELECT) {
-            if (select_map[this.YUAN_SELECT[y].CHANNELNO] == 1) {
+            if (select_map[this.YUAN_SELECT[y][filterName]] == 1) {
                 arr.push(this.YUAN_SELECT[y]);
             }
         }
         return arr;
     },
-    getDelete: function () {
+    getDelete: function (filterName) {
+        if (filterName==null){
+            filterName = this.index;
+        }
         var arr = [];
         var select_map = [];
         for (x in this.YUAN_SELECT) {
-            select_map[this.YUAN_SELECT[x].CHANNELNO] = 1;
+            select_map[this.YUAN_SELECT[x][filterName]] = 1;
         }
         for (x in this.RESULT_SELECT) {
-            if (select_map[this.RESULT_SELECT[x].CHANNELNO] == 1) {
-                select_map[this.RESULT_SELECT[x].CHANNELNO] = 0;
+            if (select_map[this.RESULT_SELECT[x][filterName]] == 1) {
+                select_map[this.RESULT_SELECT[x][filterName]] = 0;
             }
         }
         for (x in this.YUAN_SELECT) {
-            if (select_map[this.YUAN_SELECT[x].CHANNELNO] == 1) {
+            if (select_map[this.YUAN_SELECT[x][filterName]] == 1) {
                 arr.push(this.YUAN_SELECT[x]);
             }
         }
         return arr;
     },
-    getAdd: function () {
+    getAdd: function (filterName) {
+        if (filterName==null){
+            filterName = this.index;
+        }
         var arr = [];
         var select_map = [];
         for (x in this.RESULT_SELECT) {
-            select_map[this.RESULT_SELECT[x].CHANNELNO] = 1;
+            select_map[this.RESULT_SELECT[x][filterName]] = 1;
         }
         for (x in this.YUAN_SELECT) {
-            if (select_map[this.YUAN_SELECT[x].CHANNELNO] == 1) {
-                select_map[this.YUAN_SELECT[x].CHANNELNO] = 0;
+            if (select_map[this.YUAN_SELECT[x][filterName]] == 1) {
+                select_map[this.YUAN_SELECT[x][filterName]] = 0;
             }
         }
         for (x in this.RESULT_SELECT) {
-            if (select_map[this.RESULT_SELECT[x].CHANNELNO] == 1) {
+            if (select_map[this.RESULT_SELECT[x][filterName]] == 1) {
                 arr.push(this.RESULT_SELECT[x]);
             }
         }
