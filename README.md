@@ -9,7 +9,7 @@
 
 ## Usage
 
-###占位
+### 占位
 将选择框放到合适的位置
 ```html
 <select id='optgroup' multiple='multiple' style="display: none"></select>
