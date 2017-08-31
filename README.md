@@ -3,6 +3,10 @@
 
 ![select.bmp](images/select.bmp)
 
+## Demo
+
+[示例网页](https://zhizuqiu.github.io/demo/multi-select-data/)
+
 ## Usage
 
 ###占位
