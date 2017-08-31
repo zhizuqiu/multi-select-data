@@ -9,61 +9,31 @@
 <body>
 
 <div class="col-md-12 column">
-    <a id="modal-48445" href="#modal-container-48445" role="button" class="btn" data-toggle="modal">触发遮罩窗体</a>
-
-    <div class="modal fade" id="modal-container-48445" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        选择框
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: center">
-                    <select id='optgroup' multiple='multiple' style="display: none"></select>
-                    <div style="height: 10px"></div>
-                    <button type="button" class="btn btn-info btn-sm" id="btn">创建</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn3">查看原数据</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn4">清空</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn5">全选</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn6">取消</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn7">查看update</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn8">查看delete</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btn9">查看add</button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
-                </div>
-            </div>
-
+    <div>
+        <div>
+            <p>弹出：</p>
         </div>
-
+        <div>
+            <a id="modal-48445" href="#modal-container-48445" role="button" class="btn" data-toggle="modal">弹出选择框</a>
+        </div>
     </div>
-
-</div>
-
-
-<script src="./js/jquery-1.10.2.min.js"></script>
-<script src="./js/bootstrap.js"></script>
-<script src="./js/jquery.multi-select.js"></script>
-<script src="./js/jquery.quicksearch.js"></script>
-<script src="./js/jquery.multi-select-data.js"></script>
-<script>
-
+    <br/>
+    <div>
+        <div>
+            <p>代码：</p>
+        </div>
+        <pre>
+&lt;script&gt;
     var multiSelect = new MultiSelect($('#optgroup'), 'INDEX', 'TEXT', {name: 'VALID', select: '1'});
-    multiSelect.onEvent('afterSelect',function (values) {
+    multiSelect.onEvent('afterSelect', function (values) {
         console.log('afterSelect:');
         console.log(values);
     });
-    multiSelect.onEvent('afterDeselect',function (values) {
+    multiSelect.onEvent('afterDeselect', function (values) {
         console.log('afterDeselect:');
         console.log(values);
     });
-
-    $('#btn').click(function () {
-
+    $('#btn_create').click(function () {
         var data = [
             {
                 INDEX: '0',
@@ -110,34 +80,150 @@
                 VALID: '1'
             }
         ];
-
         multiSelect.init(data);
     });
-    $('#btn3').click(function () {
+    $('#btn_show').click(function () {
         alert(JSON.stringify(multiSelect.getOrigin()));
     });
-    $('#btn4').click(function () {
+    $('#btn_empty').click(function () {
         multiSelect.empty();
     });
-    $('#btn5').click(function () {
+    $('#btn_selectAll').click(function () {
         multiSelect.selectAll();
     });
-    $('#btn6').click(function () {
+    $('#btn_deselectAll').click(function () {
         multiSelect.unSelectAll();
     });
-    $('#btn7').click(function () {
+    $('#btn_showUpdate').click(function () {
         alert(JSON.stringify(multiSelect.getUpdate()));
     });
-    $('#btn8').click(function () {
+    $('#btn_showDelete').click(function () {
         alert(JSON.stringify(multiSelect.getDelete()));
     });
-    $('#btn9').click(function () {
+    $('#btn_showAdd').click(function () {
         alert(JSON.stringify(multiSelect.getAdd()));
     });
+&lt;/script&gt;
+        </pre>
+    </div>
+    <div class="modal fade" id="modal-container-48445" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择框
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <select id='optgroup' multiple='multiple' style="display: none"></select>
+                    <div style="height: 10px"></div>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_create">创建</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_show">查看原数据</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_empty">清空</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_selectAll">全选</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_deselectAll">取消</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_showUpdate">查看update</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_showDelete">查看delete</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_showAdd">查看add</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
+<script src="./js/jquery-1.10.2.min.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/jquery.multi-select.js"></script>
+<script src="./js/jquery.quicksearch.js"></script>
+<script src="./js/jquery.multi-select-data.js"></script>
+<script>
+    var multiSelect = new MultiSelect($('#optgroup'), 'INDEX', 'TEXT', {name: 'VALID', select: '1'});
+    multiSelect.onEvent('afterSelect', function (values) {
+        console.log('afterSelect:');
+        console.log(values);
+    });
+    multiSelect.onEvent('afterDeselect', function (values) {
+        console.log('afterDeselect:');
+        console.log(values);
+    });
+    $('#btn_create').click(function () {
+        var data = [
+            {
+                INDEX: '0',
+                SELECT: false,
+                TEXT: 'one',
+                CHANNEL: '0',
+                LABEL: 'billing',
+                VALID: '0'
+            }, {
+                INDEX: '1',
+                SELECT: false,
+                TEXT: 'two',
+                CHANNEL: '1',
+                LABEL: 'billing',
+                VALID: '0'
+            }, {
+                INDEX: '2',
+                SELECT: true,
+                TEXT: 'three',
+                CHANNEL: '2',
+                LABEL: 'billing',
+                VALID: '1'
+            },
+            {
+                INDEX: '3',
+                SELECT: true,
+                TEXT: 'four',
+                CHANNEL: '3',
+                LABEL: 'billing',
+                VALID: '1'
+            }, {
+                INDEX: '4',
+                SELECT: true,
+                TEXT: 'five',
+                CHANNEL: '4',
+                LABEL: 'billing',
+                VALID: '1'
+            }, {
+                INDEX: '5',
+                SELECT: true,
+                TEXT: 'six',
+                CHANNEL: '5',
+                LABEL: 'billing',
+                VALID: '1'
+            }
+        ];
+        multiSelect.init(data);
+    });
+    $('#btn_show').click(function () {
+        alert(JSON.stringify(multiSelect.getOrigin()));
+    });
+    $('#btn_empty').click(function () {
+        multiSelect.empty();
+    });
+    $('#btn_selectAll').click(function () {
+        multiSelect.selectAll();
+    });
+    $('#btn_deselectAll').click(function () {
+        multiSelect.unSelectAll();
+    });
+    $('#btn_showUpdate').click(function () {
+        alert(JSON.stringify(multiSelect.getUpdate()));
+    });
+    $('#btn_showDelete').click(function () {
+        alert(JSON.stringify(multiSelect.getDelete()));
+    });
+    $('#btn_showAdd').click(function () {
+        alert(JSON.stringify(multiSelect.getAdd()));
+    });
 </script>
-
-
 </body>
 </html>
