@@ -103,6 +103,12 @@
     $('#btn_showAdd').click(function () {
         alert(JSON.stringify(multiSelect.getAdd()));
     });
+    $('#btn_selected').click(function () {
+        alert(JSON.stringify(multiSelect.getSelected()));
+    });
+    $('#btn_deselect').click(function () {
+        alert(JSON.stringify(multiSelect.getDeselect()));
+    });
 &lt;/script&gt;
         </pre>
     </div>
@@ -126,6 +132,8 @@
                     <button type="button" class="btn btn-info btn-sm" id="btn_showUpdate">查看update</button>
                     <button type="button" class="btn btn-info btn-sm" id="btn_showDelete">查看delete</button>
                     <button type="button" class="btn btn-info btn-sm" id="btn_showAdd">查看add</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_selected">查看选择的</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btn_deselect">查看未选的</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -223,6 +231,12 @@
     });
     $('#btn_showAdd').click(function () {
         alert(JSON.stringify(multiSelect.getAdd()));
+    });
+    $('#btn_selected').click(function () {
+        alert(JSON.stringify(multiSelect.getSelected()));
+    });
+    $('#btn_deselect').click(function () {
+        alert(JSON.stringify(multiSelect.getDeselect()));
     });
 </script>
 </body>

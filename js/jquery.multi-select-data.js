@@ -1,5 +1,6 @@
 /**
  * Created by zhizuqiu on 2017/8/29.
+ * github: https://github.com/zhizuqiu/multi-select-data
  */
 
 function MultiSelect(elem, index, textField, selectFlag) {
@@ -209,5 +210,11 @@ MultiSelect.prototype = {
             }
         }
         return arr;
+    },
+    getSelected: function () {
+        return this.RESULT_SELECT;
+    },
+    getDeselect: function () {
+        return this.RESULT_ALL;
     }
 };

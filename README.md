@@ -100,9 +100,19 @@ multiSelect.getUpdate();
 multiSelect.getDelete();
 ```
 
-6. 获取相比刚初始化时，新选中的数据
+8. 获取相比刚初始化时，新选中的数据
 ```javascript
 multiSelect.getAdd();
+```
+
+9. 获取全部选择的
+```javascript
+multiSelect.getSelected();
+```
+
+10. 获取全部未选择的
+```javascript
+multiSelect.getDeselect();
 ```
 
 注意：
@@ -111,4 +121,4 @@ getUpdate()、getDelete()、getAdd()三个方法可以传入一个列名为参�
 ```javascript
 multiSelect.getAdd('CHANNEL');
 ```
-刚初始化时，如果有两个option的CHANNEL具有相同的值并分居两侧，则这两个option，无论最终选中与否，通过这个方法获取的新选中的数据将不存在返回列表中，因为是通过CHANNEL列的值作为对比条件。
+表示，刚初始化时，如果有两个option的CHANNEL具有相同的值并分居两侧，则这两个option，无论最终选中与否，通过这个方法获取的新选中的数据将不存在返回列表中，因为是通过CHANNEL列的值作为对比条件。
