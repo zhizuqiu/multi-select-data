@@ -50,14 +50,14 @@ MultiSelect.prototype = {
                     for (y in sup.RESULT_ALL) {
                         if (sup.RESULT_ALL.hasOwnProperty(y)) {
                             if (sup.RESULT_ALL[y][sup.index] == values[x]) {
+                                arr.push(sup.RESULT_ALL[y]);
                                 sup.RESULT_SELECT.push(sup.RESULT_ALL[y]);
                                 sup.RESULT_ALL.splice(y, 1);
-                                arr.push(sup.RESULT_ALL[y]);
                             }
                         }
                     }
                 }
-                sup._fire('afterSelect',arr);
+                sup._fire('afterSelect', arr);
             },
             afterDeselect: function (values) {
                 this.qs1.cache();
@@ -67,35 +67,38 @@ MultiSelect.prototype = {
                     for (y in sup.RESULT_SELECT) {
                         if (sup.RESULT_SELECT.hasOwnProperty(y)) {
                             if (sup.RESULT_SELECT[y][sup.index] == values[x]) {
+                                arr.push(sup.RESULT_SELECT[y]);
                                 sup.RESULT_ALL.push(sup.RESULT_SELECT[y]);
                                 sup.RESULT_SELECT.splice(y, 1);
-                                arr.push(sup.RESULT_ALL[y]);
                             }
                         }
                     }
                 }
-                sup._fire('afterDeselect',arr);
+                sup._fire('afterDeselect', arr);
             }
         });
     },
-    onEvent: function (type,fn) {
-        if(typeof this.events[type] === 'undefined'){
+    onEvent: function (type, fn) {
+        if (typeof this.events[type] === 'undefined') {
             this.events[type] = [fn];
-        }else{
+        } else {
             this.events[type].push(fn);
         }
-    } ,
-    _fire: function (type,event) {
-        if(!this.events[type]){
+    },
+    _fire: function (type, event) {
+        if (!this.events[type]) {
             return;
         }
         var i = 0,
             len = this.events[type].length;
-        for(;i<len;i++){
-            this.events[type][i].call(this,event);
+        for (; i < len; i++) {
+            this.events[type][i].call(this, event);
         }
     },
     init: function (RESULT_ALL) {
+
+        this.empty();
+
         this.RESULT_ALL = RESULT_ALL;
 
         this.elem.multiSelect('destroy');
@@ -119,16 +122,25 @@ MultiSelect.prototype = {
         this.elem.multiSelect('refresh');    //让快速搜索功能生效
     },
     empty: function () {
+        this.RESULT_ALL = [];
+        this.RESULT_SELECT = [];
+        this.YUAN_ALL = [];
+        this.YUAN_SELECT = [];
+
         this.clear();
         this.elem.multiSelect('destroy');
         this.elem.empty();
         this._initSelect(this);
     },
     selectAll: function () {
-        this.elem.multiSelect('select_all');
+        if (this.RESULT_ALL.length > 0) {
+            this.elem.multiSelect('select_all');
+        }
     },
     unSelectAll: function () {
-        this.elem.multiSelect('deselect_all');
+        if (this.RESULT_SELECT.length > 0) {
+            this.elem.multiSelect('deselect_all');
+        }
     },
     clear: function () {
         this.RESULT_ALL.splice(0, this.RESULT_ALL.length);
@@ -141,7 +153,7 @@ MultiSelect.prototype = {
         return origin;
     },
     getUpdate: function (filterName) {
-        if (filterName==null){
+        if (filterName == null) {
             filterName = this.index;
         }
         var arr = [];
@@ -157,7 +169,7 @@ MultiSelect.prototype = {
         return arr;
     },
     getDelete: function (filterName) {
-        if (filterName==null){
+        if (filterName == null) {
             filterName = this.index;
         }
         var arr = [];
@@ -178,7 +190,7 @@ MultiSelect.prototype = {
         return arr;
     },
     getAdd: function (filterName) {
-        if (filterName==null){
+        if (filterName == null) {
             filterName = this.index;
         }
         var arr = [];
