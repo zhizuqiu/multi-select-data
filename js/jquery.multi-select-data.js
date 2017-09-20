@@ -18,8 +18,8 @@ function MultiSelect(elem, index, textField, selectFlag) {
 MultiSelect.prototype = {
     _initSelect: function (sup) {
         sup.elem.multiSelect({
-            selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
-            selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+            selectableHeader: "<div class='thumbnail' style='text-align:center;margin-bottom:3px;'><span style='margin-bottom: 0;color: #737373'>count&nbsp;:&nbsp;</span><label id='multi-select-data-unselect-count' style='margin-bottom: 0;'>-</label></div><input type='text' class='form-control search-input' style='margin-bottom:3px;' autocomplete='off' placeholder='search...'>",
+            selectionHeader: "<div class='thumbnail' style='text-align:center;margin-bottom:3px;'><span style='margin-bottom: 0;color: #737373'>count&nbsp;:&nbsp;</span><label id='multi-select-data-selected-count' style='margin-bottom: 0;'>-</label></div><input type='text' class='form-control search-input' style='margin-bottom:3px;' autocomplete='off' placeholder='search...'>",
             afterInit: function (ms) {
                 var that = this,
                     $selectableSearch = that.$selectableUl.prev(),
@@ -58,6 +58,7 @@ MultiSelect.prototype = {
                         }
                     }
                 }
+                sup._setCount();
                 sup._fire('afterSelect', arr);
             },
             afterDeselect: function (values) {
@@ -75,9 +76,14 @@ MultiSelect.prototype = {
                         }
                     }
                 }
+                sup._setCount();
                 sup._fire('afterDeselect', arr);
             }
         });
+    },
+    _setCount: function () {
+        $('#multi-select-data-selected-count').text(this.RESULT_SELECT.length);
+        $('#multi-select-data-unselect-count').text(this.RESULT_ALL.length);
     },
     onEvent: function (type, fn) {
         if (typeof this.events[type] === 'undefined') {
@@ -121,6 +127,7 @@ MultiSelect.prototype = {
         this.YUAN_ALL = jQuery.extend(true, {}, this.RESULT_ALL);
         this.YUAN_SELECT = jQuery.extend(true, {}, this.RESULT_SELECT);
         this.elem.multiSelect('refresh');    //让快速搜索功能生效
+        this._setCount();
     },
     empty: function () {
         this.RESULT_ALL = [];
