@@ -10,7 +10,7 @@
 ## Usage
 
 ### 引用
-除了引用`multi-select`所需的文件，还要额外引入：
+除了引用`multi-select`所需的文件，还要额外引入
 ```
 <script src="./js/jquery.multi-select-data.js"></script>
 ```
@@ -49,10 +49,12 @@ var data = [
     }
 ];
 ```
+
 2. 初始化对象
 ```
 var multiSelect = new MultiSelect($('#optgroup'), 'INDEX', 'TEXT', {name: 'VALID', select: '1'});
 ```
+
 MultiSelect有四个参数：
 1. 第一个参数：DOM元素
 2. 第二个参数：对应option的value值的列，请确保此值唯一
@@ -64,6 +66,7 @@ MultiSelect有四个参数：
 ```
 multiSelect.onEvent('afterSelect',function (values) {});
 ```
+
 2. 取消选中后的回调事件
 ```
 multiSelect.onEvent('afterDeselect',function (values) {});
@@ -74,44 +77,55 @@ multiSelect.onEvent('afterDeselect',function (values) {});
 ```
 multiSelect.init(data)
 ```
+
 2. 获取原数据
 ```
 multiSelect.getOrigin()
 ```
+
 3. 清空
 ```
 multiSelect.empty();
 ```
+
 4. 选中所有
 ```
 multiSelect.selectAll();
 ```
+
 5. 取消所有
 ```
 multiSelect.unSelectAll();
 ```
+
 6. 获取相比刚初始化时，仍在选中框的数据
 ```
 multiSelect.getUpdate();
 ```
+
 7. 获取相比刚初始化时，被取消选中的数据
 ```
 multiSelect.getDelete();
 ```
+
 8. 获取相比刚初始化时，新选中的数据
 ```
 multiSelect.getAdd();
 ```
+
 9. 获取全部选择的
 ```
 multiSelect.getSelected();
 ```
+
 10. 获取全部未选择的
 ```
 multiSelect.getDeselect();
 ```
+
 注意：getUpdate()、getDelete()、getAdd()三个方法可以传入一个列名为参数，作为`对比条件`，例如
 ```
 multiSelect.getAdd('CHANNEL');
 ```
+
 表示，根据CHANNEL列，取最终选中列表与初始选中列表的差集，如果不传此值，会把KEY列作为`对比条件`。
