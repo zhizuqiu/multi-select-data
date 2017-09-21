@@ -9,6 +9,12 @@
 
 ## Usage
 
+### 引用
+除了引用`multi-select`所需的文件，还要额外引入：
+```html
+<script src="./js/jquery.multi-select-data.js"></script>
+```
+
 ### 占位
 将选择框放到合适的位置
 ```html
@@ -121,4 +127,4 @@ getUpdate()、getDelete()、getAdd()三个方法可以传入一个列名为参�
 ```javascript
 multiSelect.getAdd('CHANNEL');
 ```
-表示，刚初始化时，如果有两个option的CHANNEL具有相同的值并分居两侧，则这两个option，无论最终选中与否，通过这个方法获取的新选中的数据将不存在返回列表中，因为是通过CHANNEL列的值作为对比条件。
+表示，根据CHANNEL列，取最终选中列表与初始选中列表的差集，如果不传此值，会把KEY列作为`对比条件`。
